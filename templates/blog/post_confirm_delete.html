@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Видалити: {{ post.title }}{% endblock %}
+
+{% block content %}
+    <h1>Видалити статтю?</h1>
+    <p>Ви впевнені, що хочете видалити "{{ post.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Так, видалити</button>
+        <a href="{{ post.get_absolute_url }}">Скасувати</a>
+    </form>
+{% endblock %}

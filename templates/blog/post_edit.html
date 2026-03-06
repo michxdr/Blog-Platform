@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Редагувати: {{ post.title }}{% endblock %}
+
+{% block content %}
+    <h1>Редагувати: {{ post.title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зберегти</button>
+        <a href="{{ post.get_absolute_url }}">Скасувати</a>
+    </form>
+{% endblock %}

@@ -18,6 +18,10 @@
                 <a href="{% url 'login' %}">Увійти</a>
             {% endif %}
         </nav>
+        <form method="get" action="{% url 'post_search' %}">
+            <input type="text" name="q" placeholder="Пошук...">
+            <button type="submit">Шукати</button>
+        </form>
     </header>
 
     <main>

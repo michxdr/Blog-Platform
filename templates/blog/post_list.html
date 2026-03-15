@@ -8,9 +8,24 @@
     {% for post in posts %}
         <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
         <p>{{ post.author }} · {{ post.created_at|date:"d.m.Y" }}</p>
-        {% if post.category %}<p>Категорія: {{ post.category }}</p>{% endif %}
+       {% if post.category %}
+    <p>Категорія: <a href="{% url 'post_by_category' post.category.slug %}">{{ post.category }}</a></p>
+{% endif %}
         <hr>
     {% empty %}
         <p>Статей ще немає.</p>
     {% endfor %}
+
+    <div>
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}">← Попередня</a>
+        {% endif %}
+
+        <span>Сторінка {{ posts.number }} з {{ posts.paginator.num_pages }}</span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">Наступна →</a>
+        {% endif %}
+    </div>
+
 {% endblock %}

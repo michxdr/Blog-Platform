@@ -20,4 +20,27 @@
             <a href="{% url 'post_delete' post.slug %}">Видалити</a>
         </p>
     {% endif %}
+
+    <hr>
+    <h3>Коментарі ({{ comments.count }})</h3>
+
+    {% for comment in comments %}
+        <p><strong>{{ comment.author }}</strong> · {{ comment.created_at|date:"d.m.Y H:i" }}</p>
+        <p>{{ comment.body }}</p>
+        <hr>
+    {% empty %}
+        <p>Коментарів ще немає.</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <h3>Додати коментар</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Відправити</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Увійдіть</a> щоб залишити коментар.</p>
+    {% endif %}
+
 {% endblock %}
